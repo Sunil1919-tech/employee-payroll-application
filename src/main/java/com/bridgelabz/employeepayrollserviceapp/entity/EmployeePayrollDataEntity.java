@@ -2,17 +2,17 @@ package com.bridgelabz.employeepayrollserviceapp.entity;
 
 import com.bridgelabz.employeepayrollserviceapp.dto.EmployeePayrollDTO;
 
-public class EmployeePayrollData {
+public class EmployeePayrollDataEntity {
     private int employeeId;
     private String name;
     private long salary;
 
 //public EmployeePayrollData(){}
 
-    public EmployeePayrollData(int employeeId, EmployeePayrollDTO employeePayrollDTO){
-    this.employeeId=employeeId;
-    this.name = employeePayrollDTO.name;
-    this.salary = employeePayrollDTO.salary;
+    public EmployeePayrollDataEntity(int employeeId, EmployeePayrollDTO employeePayrollDTO) {
+        this.employeeId = employeeId;
+        this.name = employeePayrollDTO.name;
+        this.salary = employeePayrollDTO.salary;
     }
 
     public int getEmployeeId() {
