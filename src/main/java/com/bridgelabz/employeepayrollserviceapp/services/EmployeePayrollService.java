@@ -10,39 +10,38 @@ import java.util.List;
 @Service
 public class EmployeePayrollService implements IEmployeePayrollService {
 
+    private List<EmployeePayrollDataEntity> employeePayrollList = new ArrayList<>();
 
     @Override
     public List<EmployeePayrollDataEntity> getEmployeePayrolldata() {
-        List<EmployeePayrollDataEntity> entityList = new ArrayList<>();
-        entityList.add(new EmployeePayrollDataEntity(1, new EmployeePayrollDTO("Sunil", 3000)));
-        return entityList;
+        return employeePayrollList;
     }
 
     @Override
     public EmployeePayrollDataEntity getEmployeeDataById(int employeeId) {
-        EmployeePayrollDataEntity employeePayrollData = null;
-        employeePayrollData = new EmployeePayrollDataEntity(employeeId,
-                new EmployeePayrollDTO("Subhash", 2000));
-
-        return employeePayrollData;
+        return employeePayrollList.get(employeeId - 1);
     }
 
     @Override
     public EmployeePayrollDataEntity createEmployeePayrollData(EmployeePayrollDTO employeePayrollDTO) {
         EmployeePayrollDataEntity employeePayrollData = null;
-        employeePayrollData = new EmployeePayrollDataEntity(1, employeePayrollDTO);
+        employeePayrollData = new EmployeePayrollDataEntity(employeePayrollList.size() + 1, employeePayrollDTO);
+        employeePayrollList.add(employeePayrollData);
         return employeePayrollData;
     }
 
     @Override
     public EmployeePayrollDataEntity updateEmployeePayrollData(int empId, EmployeePayrollDTO employeePayrollDTO) {
-        EmployeePayrollDataEntity employeePayrollData = null;
-        employeePayrollData = new EmployeePayrollDataEntity(empId, employeePayrollDTO);
+        EmployeePayrollDataEntity employeePayrollData = this.getEmployeeDataById(empId);
+        employeePayrollData.setName(employeePayrollDTO.name);
+        employeePayrollData.setSalary(employeePayrollDTO.salary);
+        employeePayrollList.set(empId - 1, employeePayrollData);
         return employeePayrollData;
     }
 
     @Override
     public void deleteEmployeePayrollData(int empId) {
 
+        employeePayrollList.remove(empId - 1);
     }
 }
