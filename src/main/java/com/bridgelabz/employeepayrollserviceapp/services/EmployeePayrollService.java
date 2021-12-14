@@ -1,47 +1,66 @@
 package com.bridgelabz.employeepayrollserviceapp.services;
 
+import com.bridgelabz.employeepayrollserviceapp.builder.EmployeePayrollBuilder;
 import com.bridgelabz.employeepayrollserviceapp.dto.EmployeePayrollDTO;
-import com.bridgelabz.employeepayrollserviceapp.entity.EmployeePayrollDataEntity;
+import com.bridgelabz.employeepayrollserviceapp.entity.EmployeePayrollEntity;
+import com.bridgelabz.employeepayrollserviceapp.exceptions.DataNotFoundException;
+import com.bridgelabz.employeepayrollserviceapp.repository.EmployeePayrollRepository;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-public class EmployeePayrollService implements IEmployeePayrollService {
+@RestController
+public class EmployeePayrollService {
+    private static final String ADDED_EMPLOYEE = "Added Employee Details Successfully";
+    private static final String DELETED_EPLOYEE_DATA = "Deleted employee Details Successfully";
+    private static final String EMPLOYEE_DETAILS_UPDATED = "Employee Details Updated Successfully";
+    private static final String ID_INVALID = "Data not found Please try a Valid ID";
 
-    private List<EmployeePayrollDataEntity> employeePayrollList = new ArrayList<>();
 
-    @Override
-    public List<EmployeePayrollDataEntity> getEmployeePayrolldata() {
-        return employeePayrollList;
+    @Autowired
+    private EmployeePayrollRepository payrollRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Autowired
+    private EmployeePayrollBuilder payrollBuilder;
+
+    public List<EmployeePayrollDTO> getEmployeePayrollList() {
+        return payrollRepository
+                .findAll()
+                .stream()
+                .map(employeePayrollEntity ->
+                        modelMapper.map(employeePayrollEntity, EmployeePayrollDTO.class))
+                .collect(Collectors.toList());
     }
 
-    @Override
-    public EmployeePayrollDataEntity getEmployeeDataById(int employeeId) {
-        return employeePayrollList.get(employeeId - 1);
+    public String addEmployeeData(EmployeePayrollDTO employeePayrollDTO) {
+        EmployeePayrollEntity employeePayrollEntity = modelMapper.map(employeePayrollDTO, EmployeePayrollEntity.class);
+        payrollRepository.save(employeePayrollEntity);
+        return ADDED_EMPLOYEE;
     }
 
-    @Override
-    public EmployeePayrollDataEntity createEmployeePayrollData(EmployeePayrollDTO employeePayrollDTO) {
-        EmployeePayrollDataEntity employeePayrollData = null;
-        employeePayrollData = new EmployeePayrollDataEntity(employeePayrollList.size() + 1, employeePayrollDTO);
-        employeePayrollList.add(employeePayrollData);
-        return employeePayrollData;
+    public String updateEmployeeDetails(int id, EmployeePayrollDTO employeePayrollDTO) {
+        EmployeePayrollEntity employeePayrollEntity = findByEmployeeId(id);
+        employeePayrollEntity = payrollBuilder.buildPayrollEntity(employeePayrollDTO, employeePayrollEntity);
+        payrollRepository.save(employeePayrollEntity);
+        return EMPLOYEE_DETAILS_UPDATED;
     }
 
-    @Override
-    public EmployeePayrollDataEntity updateEmployeePayrollData(int empId, EmployeePayrollDTO employeePayrollDTO) {
-        EmployeePayrollDataEntity employeePayrollData = this.getEmployeeDataById(empId);
-        employeePayrollData.setName(employeePayrollDTO.name);
-        employeePayrollData.setSalary(employeePayrollDTO.salary);
-        employeePayrollList.set(empId - 1, employeePayrollData);
-        return employeePayrollData;
+    private EmployeePayrollEntity findByEmployeeId(int id) {
+        EmployeePayrollEntity employeePayrollEntity = payrollRepository.findById(id).orElseThrow(() -> new DataNotFoundException(ID_INVALID));
+        return employeePayrollEntity;
     }
 
-    @Override
-    public void deleteEmployeePayrollData(int empId) {
-
-        employeePayrollList.remove(empId - 1);
+    public String deleteEmployee(int id) {
+        EmployeePayrollEntity employeePayrollEntity = findByEmployeeId(id);
+        payrollRepository.delete(employeePayrollEntity);
+        return DELETED_EPLOYEE_DATA;
     }
 }
