@@ -48,19 +48,24 @@ public class EmployeePayrollService {
 
     public String updateEmployeeDetails(int id, EmployeePayrollDTO employeePayrollDTO) {
         EmployeePayrollEntity employeePayrollEntity = findByEmployeeId(id);
-        employeePayrollEntity = payrollBuilder.buildPayrollEntity(employeePayrollDTO, employeePayrollEntity);
-        payrollRepository.save(employeePayrollEntity);
+        EmployeePayrollEntity payrollEntity = payrollBuilder.buildPayrollEntity(employeePayrollDTO, employeePayrollEntity);
+        payrollRepository.save(payrollEntity);
         return EMPLOYEE_DETAILS_UPDATED;
-    }
-
-    private EmployeePayrollEntity findByEmployeeId(int id) {
-        EmployeePayrollEntity employeePayrollEntity = payrollRepository.findById(id).orElseThrow(() -> new DataNotFoundException(ID_INVALID));
-        return employeePayrollEntity;
     }
 
     public String deleteEmployee(int id) {
         EmployeePayrollEntity employeePayrollEntity = findByEmployeeId(id);
         payrollRepository.delete(employeePayrollEntity);
         return DELETED_EPLOYEE_DATA;
+    }
+
+    private EmployeePayrollEntity findByEmployeeId(int id) {
+        return payrollRepository.findById(id).orElseThrow(() -> new DataNotFoundException(ID_INVALID));
+    }
+
+
+    public EmployeePayrollDTO getEmployeeByID(int id) {
+        EmployeePayrollEntity employeePayrollEntity = findByEmployeeId(id);
+        return modelMapper.map(employeePayrollEntity, EmployeePayrollDTO.class);
     }
 }

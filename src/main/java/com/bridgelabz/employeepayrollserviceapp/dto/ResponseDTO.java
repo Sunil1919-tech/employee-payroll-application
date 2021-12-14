@@ -1,7 +1,8 @@
 package com.bridgelabz.employeepayrollserviceapp.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+
+import java.util.Date;
 
 /**
  * purpose: to maintain the response data in an object
@@ -12,9 +13,15 @@ import lombok.Data;
  * @since 7/12/2021
  */
 @Data
-@AllArgsConstructor
 public class ResponseDTO {
 
     private String message;
-    private Object data;
+    private Object details;
+    private Date timestamp;
+
+    public ResponseDTO(String message, Object details, Date timestamp) {
+        this.message = message;
+        this.details = details;
+        this.timestamp = timestamp;
+    }
 }
