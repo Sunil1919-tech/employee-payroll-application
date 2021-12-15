@@ -16,9 +16,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Purpose: to handle the exception for validation
+ *
+ * @author Sunil
+ * @version 0.0.1
+ * @since 07/12/2021
+ */
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
+    /**
+     * Purpose: Method to handle the exception for validation
+     *
+     * @param exception: Throws MethodArgumentNotValidException if validation fails
+     * @param headers:   to pass additional information between the clients and the server through the request and
+     *                   response header
+     * @param status:    in response to a client's request made to the server
+     * @param request:   message that is transmitted between the client, or web browsers, to the servers
+     * @return ResponseEntity
+     */
     @Override
     public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException exception,
                                                                HttpHeaders headers,
@@ -37,6 +54,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(body, headers, status);
     }
 
+    /**
+     * Purpose: exception method to handle when data not found in database
+     *
+     * @param notFoundException : thrown when data not found
+     * @param request:          message that is transmitted between the client, or web browsers, to the servers
+     * @return response entity contains the message
+     */
     @ExceptionHandler(DataNotFoundException.class)
     public ResponseEntity<ResponseDTO> handleNotFoundException(DataNotFoundException notFoundException, WebRequest request) {
         ResponseDTO responseDTO = new ResponseDTO(notFoundException.getMessage(), request.getDescription(false), new Date());

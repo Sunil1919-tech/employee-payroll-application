@@ -2,10 +2,17 @@ package com.bridgelabz.employeepayrollserviceapp.entity;
 
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-
+/**
+ * Purpose: initializing the inputs to connect with the server
+ *
+ * @author Sunil
+ * @version 0.0.1
+ * @since 07/12/2021
+ */
 @Data
 @Entity
 @Table(name = "employee_service")
