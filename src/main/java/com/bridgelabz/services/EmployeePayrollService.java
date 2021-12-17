@@ -1,10 +1,10 @@
-package com.bridgelabz.employeepayrollserviceapp.services;
+package com.bridgelabz.services;
 
-import com.bridgelabz.employeepayrollserviceapp.builder.EmployeePayrollBuilder;
-import com.bridgelabz.employeepayrollserviceapp.dto.EmployeePayrollDTO;
-import com.bridgelabz.employeepayrollserviceapp.entity.EmployeePayrollEntity;
-import com.bridgelabz.employeepayrollserviceapp.exceptions.DataNotFoundException;
-import com.bridgelabz.employeepayrollserviceapp.repository.EmployeePayrollRepository;
+import com.bridgelabz.builder.EmployeePayrollBuilder;
+import com.bridgelabz.dto.EmployeePayrollDTO;
+import com.bridgelabz.entity.EmployeePayrollEntity;
+import com.bridgelabz.exceptions.DataNotFoundException;
+import com.bridgelabz.repository.EmployeePayrollRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

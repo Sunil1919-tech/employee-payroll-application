@@ -1,7 +1,7 @@
-package com.bridgelabz.employeepayrollserviceapp.controllers;
+package com.bridgelabz.controller;
 
-import com.bridgelabz.employeepayrollserviceapp.dto.EmployeePayrollDTO;
-import com.bridgelabz.employeepayrollserviceapp.services.EmployeePayrollService;
+import com.bridgelabz.dto.EmployeePayrollDTO;
+import com.bridgelabz.services.EmployeePayrollService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +39,7 @@ public class EmployeePayrollController {
      * Purpose: function to receive post request from client to add the Data
      * in the database
      *
-     * @param employeePayrollDTO : employe data given from client end
+     * @param employeePayrollDTO : employee data given from client end
      * @return : response entity newly created Data
      */
     @PostMapping("/employee")

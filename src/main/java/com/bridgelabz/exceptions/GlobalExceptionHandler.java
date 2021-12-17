@@ -1,6 +1,6 @@
-package com.bridgelabz.employeepayrollserviceapp.exceptions;
+package com.bridgelabz.exceptions;
 
-import com.bridgelabz.employeepayrollserviceapp.dto.ResponseDTO;
+import com.bridgelabz.dto.ResponseDTO;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -67,9 +68,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(responseDTO, HttpStatus.NOT_FOUND);
     }
 
-//    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
-//    public ResponseEntity<ResponseDTO> handleConstraintViolationException(SQLIntegrityConstraintViolationException sqlIntegrityConstraintViolationException, WebRequest request) {
-//        ResponseDTO responseDTO = new ResponseDTO(sqlIntegrityConstraintViolationException.getMessage(), request.getDescription(false), new Date());
-//        return new ResponseEntity<>(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
+    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+    public ResponseEntity<ResponseDTO> handleConstraintViolationException(SQLIntegrityConstraintViolationException sqlIntegrityConstraintViolationException, WebRequest request) {
+        ResponseDTO responseDTO = new ResponseDTO(sqlIntegrityConstraintViolationException.getMessage(), request.getDescription(false), new Date());
+        return new ResponseEntity<>(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

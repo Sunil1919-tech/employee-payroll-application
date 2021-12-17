@@ -1,4 +1,4 @@
-package com.bridgelabz.employeepayrollserviceapp.entity;
+package com.bridgelabz.entity;
 
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;

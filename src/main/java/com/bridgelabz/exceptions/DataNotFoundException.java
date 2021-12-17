@@ -1,4 +1,4 @@
-package com.bridgelabz.employeepayrollserviceapp.exceptions;
+package com.bridgelabz.exceptions;
 
 public class DataNotFoundException extends RuntimeException {
     public DataNotFoundException(String message) {

@@ -1,9 +1,8 @@
-package com.bridgelabz.employeepayrollserviceapp.builder;
+package com.bridgelabz.builder;
 
-import com.bridgelabz.employeepayrollserviceapp.dto.EmployeePayrollDTO;
-import com.bridgelabz.employeepayrollserviceapp.entity.EmployeePayrollEntity;
+import com.bridgelabz.dto.EmployeePayrollDTO;
+import com.bridgelabz.entity.EmployeePayrollEntity;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,8 +14,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class EmployeePayrollBuilder {
-    @Autowired
-    private ModelMapper modelMapper;
+
+    private final ModelMapper modelMapper= new ModelMapper();
 
     /**
      * Purpose: to map dto to entity

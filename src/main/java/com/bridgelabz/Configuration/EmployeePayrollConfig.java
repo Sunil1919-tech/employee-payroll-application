@@ -1,4 +1,4 @@
-package com.bridgelabz.employeepayrollserviceapp.Configuration;
+package com.bridgelabz.Configuration;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
