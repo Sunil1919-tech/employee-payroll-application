@@ -28,14 +28,14 @@ public class EmployeePayrollControllerTest {
         EmployeePayrollDTO employeePayrollDTO1 = new EmployeePayrollDTO();
         employeePayrollDTO1.setName("Sunil");
         employeePayrollDTO1.setGender("Male");
-        employeePayrollDTO1.setSalary("3000");
+        employeePayrollDTO1.setSalary("33000");
         employeePayrollDTO1.setDepartment("It");
         employeePayrollDTO1.setNotes("Good person, Workaholic");
         employeePayrollDTOList.add(employeePayrollDTO1);
         EmployeePayrollDTO employeePayrollDTO2 = new EmployeePayrollDTO();
         employeePayrollDTO2.setName("Ria");
         employeePayrollDTO2.setGender("Female");
-        employeePayrollDTO2.setSalary("2000");
+        employeePayrollDTO2.setSalary("25000");
         employeePayrollDTO2.setDepartment("Helpdesk");
         employeePayrollDTO2.setNotes("very nice");
         employeePayrollDTOList.add(employeePayrollDTO2);
