@@ -64,12 +64,22 @@ public class EmployeePayrollControllerTest {
         employeePayrollDTO.setNotes("Good person, Workaholic");
         when(employeePayrollService.addEmployeeData(employeePayrollDTO)).thenReturn(successMessage);
         ResponseEntity<String> message = payrollController.addEmployeePayrollData(employeePayrollDTO);
-        assertEquals(expectedResponseEntity,message);
+        assertEquals(expectedResponseEntity, message);
     }
 
     @Test
     void whenUpdateEmployeeDetailCalled_shouldUpdateEmployeeAndGenerateSucceedMessage() {
-        String successMessage= "Employee Details Updated Successfully";
-        when(employeePayrollService.updateEmployeeDetails()).thenReturn(successMessage);
+        String successMessage = "Employee Details Updated Successfully";
+        int empID = 1;
+        ResponseEntity<String> expectedResponseEntity = new ResponseEntity<>(successMessage, HttpStatus.OK);
+        EmployeePayrollDTO employeePayrollDTO = new EmployeePayrollDTO();
+        employeePayrollDTO.setName("Sunil");
+        employeePayrollDTO.setGender("Male");
+        employeePayrollDTO.setSalary("33000");
+        employeePayrollDTO.setDepartment("It");
+        employeePayrollDTO.setNotes("Good person, Workaholic");
+        when(employeePayrollService.updateEmployeeDetails(empID, employeePayrollDTO)).thenReturn(successMessage);
+        ResponseEntity<String> actualResponse = payrollController.updateEmployee(empID, employeePayrollDTO);
+        assertEquals(expectedResponseEntity, actualResponse);
     }
 }
