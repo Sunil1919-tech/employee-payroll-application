@@ -24,9 +24,9 @@ public class SwaggerConfiguration {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder().title("Address Book Application")
                 .description("Sample Documentation Generated Using SWAGGER2 for Address Book Application")
-                .termsOfServiceUrl("https://github.com/ashwith31")
+                .termsOfServiceUrl("https://github.com/Sunil1919-tech")
                 .license("License")
-                .licenseUrl("https://github.com/ashwith31")
+                .licenseUrl("https://github.com/Sunil1919-tech")
                 .version("1.0")
                 .build();
     }

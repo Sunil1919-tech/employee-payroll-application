@@ -7,6 +7,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,5 +50,26 @@ public class EmployeePayrollControllerTest {
             assertEquals(employeePayrollDTOList.get(i).getDepartment(), actualResponse.get(i).getDepartment());
             assertEquals(employeePayrollDTOList.get(i).getNotes(), actualResponse.get(i).getNotes());
         }
+    }
+
+    @Test
+    void whenAddEmployeeCalled_shouldAddEmployeeDetailsAnd_generateSucceedMessage() {
+        String successMessage = " Added Employee Details Successfully";
+        ResponseEntity<String> expectedResponseEntity = new ResponseEntity<>(successMessage, HttpStatus.OK);
+        EmployeePayrollDTO employeePayrollDTO = new EmployeePayrollDTO();
+        employeePayrollDTO.setName("Sunil");
+        employeePayrollDTO.setGender("Male");
+        employeePayrollDTO.setSalary("33000");
+        employeePayrollDTO.setDepartment("It");
+        employeePayrollDTO.setNotes("Good person, Workaholic");
+        when(employeePayrollService.addEmployeeData(employeePayrollDTO)).thenReturn(successMessage);
+        ResponseEntity<String> message = payrollController.addEmployeePayrollData(employeePayrollDTO);
+        assertEquals(expectedResponseEntity,message);
+    }
+
+    @Test
+    void whenUpdateEmployeeDetailCalled_shouldUpdateEmployeeAndGenerateSucceedMessage() {
+        String successMessage= "Employee Details Updated Successfully";
+        when(employeePayrollService.updateEmployeeDetails()).thenReturn(successMessage);
     }
 }
