@@ -68,7 +68,7 @@ public class EmployeePayrollControllerTest {
     }
 
     @Test
-    void whenUpdateEmployeeDetailCalled_shouldUpdateEmployeeAndGenerateSucceedMessage() {
+    void whenUpdateEmployeeDetailCalledByID_shouldUpdateEmployeeAndGenerateSucceedMessage() {
         String successMessage = "Employee Details Updated Successfully";
         int empID = 1;
         ResponseEntity<String> expectedResponseEntity = new ResponseEntity<>(successMessage, HttpStatus.OK);
@@ -80,6 +80,16 @@ public class EmployeePayrollControllerTest {
         employeePayrollDTO.setNotes("Good person, Workaholic");
         when(employeePayrollService.updateEmployeeDetails(empID, employeePayrollDTO)).thenReturn(successMessage);
         ResponseEntity<String> actualResponse = payrollController.updateEmployee(empID, employeePayrollDTO);
+        assertEquals(expectedResponseEntity, actualResponse);
+    }
+
+    @Test
+    void whenDeleteEmployeeCalled_withGivenID_shouldDeleteEmployeeAndReturnSucceedMessage() {
+        String successMessage = "Deleted employee Details Successfully";
+        int empID = 1;
+        ResponseEntity<String> expectedResponseEntity = new ResponseEntity<>(successMessage, HttpStatus.OK);
+        when(employeePayrollService.deleteEmployee(empID)).thenReturn(successMessage);
+        ResponseEntity<String> actualResponse = payrollController.deleteEmployee(empID);
         assertEquals(expectedResponseEntity, actualResponse);
     }
 }
