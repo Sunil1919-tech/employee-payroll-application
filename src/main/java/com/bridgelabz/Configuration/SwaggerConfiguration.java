@@ -15,15 +15,15 @@ public class SwaggerConfiguration {
     @Bean
     public Docket postApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("Address Book")
+                .groupName("Employee Payroll Service")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.bridgelabz.controller"))
                 .build();
     }
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("Address Book Application")
-                .description("Sample Documentation Generated Using SWAGGER2 for Address Book Application")
+        return new ApiInfoBuilder().title("Employee Payroll Application")
+                .description("Sample Documentation Generated Using SWAGGER2 for Employee Payroll Application")
                 .termsOfServiceUrl("https://github.com/Sunil1919-tech")
                 .license("License")
                 .licenseUrl("https://github.com/Sunil1919-tech")

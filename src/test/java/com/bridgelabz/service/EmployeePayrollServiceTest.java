@@ -46,7 +46,7 @@ public class EmployeePayrollServiceTest {
         payrollEntity1.setName("Sunil");
         payrollEntity1.setGender("Male");
         payrollEntity1.setSalary("33000");
-        payrollEntity1.setDepartment("It");
+        payrollEntity1.setDepartments("it");
         payrollEntity1.setNote("Good person, Workaholic");
         payrollEntity1.setStartDate(LocalDateTime.now());
         payrollEntityList.add(payrollEntity1);
@@ -55,7 +55,7 @@ public class EmployeePayrollServiceTest {
         payrollEntity2.setName("Ria");
         payrollEntity2.setGender("Female");
         payrollEntity2.setSalary("25000");
-        payrollEntity2.setDepartment("Helpdesk");
+        payrollEntity2.setDepartments("helpdesk");
         payrollEntity2.setNote("very nice");
         payrollEntity2.setStartDate(LocalDateTime.now());
         payrollEntityList.add(payrollEntity2);
@@ -64,15 +64,15 @@ public class EmployeePayrollServiceTest {
         employeePayrollDTO1.setName("Sunil");
         employeePayrollDTO1.setGender("Male");
         employeePayrollDTO1.setSalary("33000");
-        employeePayrollDTO1.setDepartment("It");
-        employeePayrollDTO1.setNotes("Good person, Workaholic");
+        employeePayrollDTO1.setDepartments("it");
+        employeePayrollDTO1.setNote("Good person, Workaholic");
         employeePayrollDTOList.add(employeePayrollDTO1);
         EmployeePayrollDTO employeePayrollDTO2 = new EmployeePayrollDTO();
         employeePayrollDTO2.setName("Ria");
         employeePayrollDTO2.setGender("Female");
         employeePayrollDTO2.setSalary("25000");
-        employeePayrollDTO2.setDepartment("Helpdesk");
-        employeePayrollDTO2.setNotes("very nice");
+        employeePayrollDTO2.setDepartments("helpdesk");
+        employeePayrollDTO2.setNote("very nice");
         employeePayrollDTOList.add(employeePayrollDTO2);
         when(payrollRepository.findAll()).thenReturn(payrollEntityList);
         when(modelMapper.map(payrollEntityList.get(0), EmployeePayrollDTO.class)).thenReturn(employeePayrollDTO1);
@@ -89,15 +89,15 @@ public class EmployeePayrollServiceTest {
         employeePayrollDTO.setName("Sunil");
         employeePayrollDTO.setGender("Male");
         employeePayrollDTO.setSalary("33000");
-        employeePayrollDTO.setDepartment("It");
-        employeePayrollDTO.setNotes("Good person, Workaholic");
+        employeePayrollDTO.setDepartments("Hr");
+        employeePayrollDTO.setNote("Good person, Workaholic");
 
         EmployeePayrollEntity payrollEntity = new EmployeePayrollEntity();
         payrollEntity.setEmployeeId(1);
         payrollEntity.setName("Sunil");
         payrollEntity.setGender("Male");
         payrollEntity.setSalary("33000");
-        payrollEntity.setDepartment("It");
+        payrollEntity.setDepartments("Hr");
         payrollEntity.setNote("Good person, Workaholic");
         payrollEntity.setStartDate(LocalDateTime.now());
         when(modelMapper.map(employeePayrollDTO, EmployeePayrollEntity.class)).thenReturn(payrollEntity);
@@ -113,8 +113,8 @@ public class EmployeePayrollServiceTest {
         employeePayrollDTO.setName("Sunil");
         employeePayrollDTO.setGender("Male");
         employeePayrollDTO.setSalary("33000");
-        employeePayrollDTO.setDepartment("It");
-        employeePayrollDTO.setNotes("Good person, Workaholic");
+        employeePayrollDTO.setDepartments("It");
+        employeePayrollDTO.setNote("Good person, Workaholic");
         when(payrollRepository.findById(id)).thenReturn(Optional.empty());
         assertThrows(DataNotFoundException.class,
                 () -> payrollService.updateEmployeeDetails(id, employeePayrollDTO));
@@ -130,15 +130,15 @@ public class EmployeePayrollServiceTest {
         employeePayrollDTO.setName("Sunil");
         employeePayrollDTO.setGender("Male");
         employeePayrollDTO.setSalary("33000");
-        employeePayrollDTO.setDepartment("It");
-        employeePayrollDTO.setNotes("Good person, Workaholic");
+        employeePayrollDTO.setDepartments("It");
+        employeePayrollDTO.setNote("Good person, Workaholic");
 
         EmployeePayrollEntity payrollEntity = new EmployeePayrollEntity();
         payrollEntity.setEmployeeId(1);
         payrollEntity.setName("Sunil");
         payrollEntity.setGender("Male");
         payrollEntity.setSalary("33000");
-        payrollEntity.setDepartment("It");
+        payrollEntity.setDepartments("noTech");
         payrollEntity.setNote("Good person, Workaholic");
         payrollEntity.setStartDate(LocalDateTime.now());
         when(payrollRepository.findById(empId)).thenReturn(Optional.of(payrollEntity));
@@ -148,7 +148,7 @@ public class EmployeePayrollServiceTest {
         assertEquals(payrollEntity.getName(), payrollEntityArgumentCaptor.getValue().getName());
         assertEquals(payrollEntity.getGender(), payrollEntityArgumentCaptor.getValue().getGender());
         assertEquals(payrollEntity.getSalary(), payrollEntityArgumentCaptor.getValue().getSalary());
-        assertEquals(payrollEntity.getDepartment(), payrollEntityArgumentCaptor.getValue().getDepartment());
+        assertEquals(payrollEntity.getDepartments(), payrollEntityArgumentCaptor.getValue().getDepartments());
         assertEquals(payrollEntity.getNote(), payrollEntityArgumentCaptor.getValue().getNote());
         assertEquals(payrollEntity.getStartDate(), payrollEntityArgumentCaptor.getValue().getStartDate());
     }
@@ -168,15 +168,15 @@ public class EmployeePayrollServiceTest {
         employeePayrollDTO.setName("Sunil");
         employeePayrollDTO.setGender("Male");
         employeePayrollDTO.setSalary("33000");
-        employeePayrollDTO.setDepartment("It");
-        employeePayrollDTO.setNotes("Good person, Workaholic");
+        employeePayrollDTO.setDepartments("It");
+        employeePayrollDTO.setNote("Good person, Workaholic");
 
         EmployeePayrollEntity payrollEntity = new EmployeePayrollEntity();
         payrollEntity.setEmployeeId(1);
         payrollEntity.setName("Sunil");
         payrollEntity.setGender("Male");
         payrollEntity.setSalary("33000");
-        payrollEntity.setDepartment("It");
+        payrollEntity.setDepartments("It");
         payrollEntity.setNote("Good person, Workaholic");
         payrollEntity.setStartDate(LocalDateTime.now());
         when(payrollRepository.findById(empId)).thenReturn(Optional.of(payrollEntity));

@@ -41,8 +41,8 @@ public class PayrollControllerIntegrationTest {
         when(employeePayrollService.addEmployeeData(any())).thenReturn("Success");
         mockMvc.perform(MockMvcRequestBuilders
                         .post("/employee-payroll-service/employee")
-                        .content("{\"name\":\"Sunil\",\"gender\":\"Male\",\"salary\":\"22000\",\"department\":\"it\"," +
-                                "\"note\":\"good person\",\"startDate\":\"19/12/2021\"}")
+                        .content("{\"departments\":\"Hr\",\"gender\":\"Male\",\"name\":\"Sunil\"," +
+                                "\"note\":\"Good\",\"salary\":\"21000\"}")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk());
 
@@ -55,14 +55,14 @@ public class PayrollControllerIntegrationTest {
         payrollDTO.setName("Sunil");
         payrollDTO.setGender("Male");
         payrollDTO.setSalary("32000");
-        payrollDTO.setDepartment("devops");
-        payrollDTO.setNotes("very true");
+        payrollDTO.setDepartments("devops");
+        payrollDTO.setNote("very true");
         int empId = 1;
         when(employeePayrollService.updateEmployeeDetails(empId, payrollDTO)).thenReturn("Success");
         mockMvc.perform(MockMvcRequestBuilders
                         .put("/employee-payroll-service/employee/1")
-                        .content("{\"name\":\"Justin\",\"gender\":\"Male\",\"salary\":\"34000\",\"department\":\"Hr\"," +
-                                "\"note\":\"good logical thinking\",\"startDate\":\"19/12/2021\"}")
+                        .content("{\"departments\":\"nonTech\",\"gender\":\"Male\",\"name\":\"Subhash\"," +
+                                "\"note\":\"Good person\",\"salary\":\"27000\"}")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk());
     }

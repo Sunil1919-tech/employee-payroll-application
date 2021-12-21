@@ -31,15 +31,15 @@ public class EmployeePayrollControllerTest {
         employeePayrollDTO1.setName("Sunil");
         employeePayrollDTO1.setGender("Male");
         employeePayrollDTO1.setSalary("33000");
-        employeePayrollDTO1.setDepartment("It");
-        employeePayrollDTO1.setNotes("Good person, Workaholic");
+        employeePayrollDTO1.setDepartments("It");
+        employeePayrollDTO1.setNote("Good person, Workaholic");
         employeePayrollDTOList.add(employeePayrollDTO1);
         EmployeePayrollDTO employeePayrollDTO2 = new EmployeePayrollDTO();
         employeePayrollDTO2.setName("Ria");
         employeePayrollDTO2.setGender("Female");
         employeePayrollDTO2.setSalary("25000");
-        employeePayrollDTO2.setDepartment("Helpdesk");
-        employeePayrollDTO2.setNotes("very nice");
+        employeePayrollDTO2.setDepartments("Helpdesk");
+        employeePayrollDTO2.setNote("very nice");
         employeePayrollDTOList.add(employeePayrollDTO2);
         when(employeePayrollService.getEmployeePayrollList()).thenReturn(employeePayrollDTOList);
         List<EmployeePayrollDTO> actualResponse = payrollController.getAllEmployeeDetails();
@@ -47,8 +47,8 @@ public class EmployeePayrollControllerTest {
             assertEquals(employeePayrollDTOList.get(i).getName(), actualResponse.get(i).getName());
             assertEquals(employeePayrollDTOList.get(i).getGender(), actualResponse.get(i).getGender());
             assertEquals(employeePayrollDTOList.get(i).getSalary(), actualResponse.get(i).getSalary());
-            assertEquals(employeePayrollDTOList.get(i).getDepartment(), actualResponse.get(i).getDepartment());
-            assertEquals(employeePayrollDTOList.get(i).getNotes(), actualResponse.get(i).getNotes());
+            assertEquals(employeePayrollDTOList.get(i).getDepartments(), actualResponse.get(i).getDepartments());
+            assertEquals(employeePayrollDTOList.get(i).getNote(), actualResponse.get(i).getNote());
         }
     }
 
@@ -60,8 +60,8 @@ public class EmployeePayrollControllerTest {
         employeePayrollDTO.setName("Sunil");
         employeePayrollDTO.setGender("Male");
         employeePayrollDTO.setSalary("33000");
-        employeePayrollDTO.setDepartment("It");
-        employeePayrollDTO.setNotes("Good person, Workaholic");
+        employeePayrollDTO.setDepartments("It");
+        employeePayrollDTO.setNote("Good person, Workaholic");
         when(employeePayrollService.addEmployeeData(employeePayrollDTO)).thenReturn(successMessage);
         ResponseEntity<String> message = payrollController.addEmployeePayrollData(employeePayrollDTO);
         assertEquals(expectedResponseEntity, message);
@@ -76,8 +76,8 @@ public class EmployeePayrollControllerTest {
         employeePayrollDTO.setName("Sunil");
         employeePayrollDTO.setGender("Male");
         employeePayrollDTO.setSalary("33000");
-        employeePayrollDTO.setDepartment("It");
-        employeePayrollDTO.setNotes("Good person, Workaholic");
+        employeePayrollDTO.setDepartments("It");
+        employeePayrollDTO.setNote("Good person, Workaholic");
         when(employeePayrollService.updateEmployeeDetails(empID, employeePayrollDTO)).thenReturn(successMessage);
         ResponseEntity<String> actualResponse = payrollController.updateEmployee(empID, employeePayrollDTO);
         assertEquals(expectedResponseEntity, actualResponse);

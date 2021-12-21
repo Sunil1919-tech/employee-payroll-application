@@ -23,8 +23,9 @@ public class EmployeePayrollEntity {
     private String name;
     private String gender;
     private String salary;
-    private String department;
+    private String departments;
     private String note;
+
     @CreationTimestamp
     private LocalDateTime startDate;
 }
